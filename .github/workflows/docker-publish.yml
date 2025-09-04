@@ -11,17 +11,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ADD THIS STEP to see the folder structure
-      - name: List files in repository
-        run: ls -R
-
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # REMOVE "QuickAI/" from the context path here
+      # Corrected path to lowercase "server"
       - name: Build and push server image
         uses: docker/build-push-action@v5
         with:
@@ -29,10 +25,10 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/quickai-server:latest
 
-      # REMOVE "QuickAI/" from the context path here
+      # Corrected path to uppercase "Client"
       - name: Build and push client image
         uses: docker/build-push-action@v5
         with:
-          context: ./client
+          context: ./Client
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/quickai-client:latest
