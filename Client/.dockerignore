@@ -1,0 +1,14 @@
+# Dependencies
+node_modules
+
+# Local Environment
+.env
+.DS_Store
+
+# Build output
+build
+dist
+
+# Git
+.git
+.gitignore

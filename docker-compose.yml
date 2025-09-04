@@ -1,0 +1,26 @@
+services:
+  # The Backend API Service
+  server:
+    build: ./server
+    container_name: my-api
+    ports:
+      - "8080:3000"
+    env_file:
+      - ./server/.env
+
+  # The Frontend Client Service
+  client:
+    build:
+      context: ./client
+      args:
+        VITE_API_URL: http://localhost:8080
+        VITE_CLERK_PUBLISHABLE_KEY: pk_test_YnVyc3RpbmctbXVsbGV0LTQ4LmNsZXJrLmFjY291bnRzLmRldiQ
+        VITE_GEMNI_API_KEY: AIzaSyAQfY8tEOT500yW3tO49SWqRCyvYT5Qif8
+        VITE_CLICKDROP_API_KEY: 3ae240c4b42475be828b8f61dac1b4f6eacfddad660ff9ff2dd2833a2874a70ef5272e3f6be74d630a9ad97374256dac
+        VITE_CLOUDINARY_CLOUD_NAME: dkakkanp5
+        VITE_CLOUDINARY_API_KEY: 267136157583371
+    container_name: my-client
+    ports:
+      - "3000:80"
+    depends_on:
+      - server
